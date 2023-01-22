@@ -17,7 +17,7 @@ const jobRouter = require("./routes/job.routes");
 //---------------------------------------
 // Middleware
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -57,11 +57,27 @@ app.get("/:token", async (req, res) => {
 
 //---------------------------------------
 // Server
-app.listen(PORT, async () => {
+// app.listen(PORT, async () => {
+//   try {
+//     await connection;
+//   } catch {
+//     console.log("Something went wrong while connecting to db");
+//   }
+//   console.log(`listening on PORT ${PORT}`);
+// });
+
+const connectDB = async () => {
   try {
-    await connection;
-  } catch {
-    console.log("Something went wrong while connecting to db");
+    const conn = await mongoose.connect(process.env.MONGODB_URL);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
   }
-  console.log(`listening on PORT ${PORT}`);
+};
+
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log("listening for requests");
+  });
 });
