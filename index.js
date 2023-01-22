@@ -56,7 +56,7 @@ app.get("/:token", async (req, res) => {
 });
 
 //---------------------------------------
-Server;
+// Server
 app.listen(PORT, async () => {
   try {
     await connection;
