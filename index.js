@@ -86,15 +86,36 @@ app.get("/:token", async (req, res) => {
 
 // &&&&&&&&&&&&&&&&&&&&&&&&&&
 
-const { MongoClient } = require("mongodb");
+// const { MongoClient } = require("mongodb");
+// const uri = process.env.MONGODB_URL;
+// const client = new MongoClient(uri);
+// client.connect((err) => {
+//   if (err) {
+//     console.error(err);
+//     return false;
+//   }
+//   // connection to mongo is successful, listen for requests
+//   app.listen(PORT, () => {
+//     console.log("listening for requests");
+//   });
+// });
+
+// &&&&&&&&&&&&&&&&&&&&&&&&&&
+
+const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = process.env.MONGODB_URL;
-const client = new MongoClient(uri);
+
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
+});
 client.connect((err) => {
-  if (err) {
-    console.error(err);
-    return false;
-  }
-  // connection to mongo is successful, listen for requests
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+
+  // client.close();
+
   app.listen(PORT, () => {
     console.log("listening for requests");
   });
