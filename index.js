@@ -56,15 +56,15 @@ app.get("/:token", async (req, res) => {
 });
 
 //---------------------------------------
-// Server
-// app.listen(PORT, async () => {
-//   try {
-//     await connection;
-//   } catch {
-//     console.log("Something went wrong while connecting to db");
-//   }
-//   console.log(`listening on PORT ${PORT}`);
-// });
+Server;
+app.listen(PORT, async () => {
+  try {
+    await connection;
+  } catch {
+    console.log("Something went wrong while connecting to db");
+  }
+  console.log(`listening on PORT ${PORT}`);
+});
 
 // &&&&&&&&&&&&&&&&&&&&&&&&&&
 
@@ -102,21 +102,21 @@ app.get("/:token", async (req, res) => {
 
 // &&&&&&&&&&&&&&&&&&&&&&&&&&
 
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const uri = process.env.MONGODB_URL;
+// const { MongoClient, ServerApiVersion } = require("mongodb");
+// const uri = process.env.MONGODB_URL;
 
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
-});
-client.connect((err) => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
+// const client = new MongoClient(uri, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   serverApi: ServerApiVersion.v1,
+// });
+// client.connect((err) => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
 
-  // client.close();
+//   // client.close();
 
-  app.listen(PORT, () => {
-    console.log("listening for requests");
-  });
-});
+//   app.listen(PORT, () => {
+//     console.log("listening for requests");
+//   });
+// });
