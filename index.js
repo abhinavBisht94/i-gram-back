@@ -66,17 +66,35 @@ app.get("/:token", async (req, res) => {
 //   console.log(`listening on PORT ${PORT}`);
 // });
 
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGODB_URL);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  }
-};
+// &&&&&&&&&&&&&&&&&&&&&&&&&&
 
-connectDB().then(() => {
+// const connectDB = async () => {
+//   try {
+//     const conn = await mongoose.connect(process.env.MONGODB_URL);
+//     console.log(`MongoDB Connected: ${conn.connection.host}`);
+//   } catch (error) {
+//     console.log(error);
+//     process.exit(1);
+//   }
+// };
+
+// connectDB().then(() => {
+//   app.listen(PORT, () => {
+//     console.log("listening for requests");
+//   });
+// });
+
+// &&&&&&&&&&&&&&&&&&&&&&&&&&
+
+const { MongoClient } = require("mongodb");
+const uri = process.env.MONGODB_URL;
+const client = new MongoClient(uri);
+client.connect((err) => {
+  if (err) {
+    console.error(err);
+    return false;
+  }
+  // connection to mongo is successful, listen for requests
   app.listen(PORT, () => {
     console.log("listening for requests");
   });
